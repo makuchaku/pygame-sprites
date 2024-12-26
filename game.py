@@ -84,7 +84,18 @@ class Game:
         pygame.quit()
 
     
-
+    def show_message(message):
+        print('showing text')
+        #sets the font and color
+        font=pygame.font.SysFont('timesnewroman',  60)
+        green = 255, 165, 0
+        text = font.render(message, True, green)
+        textRect = text.get_rect()
+        #puts the score at the center of the screen
+        textRect.center = (screen_height // 2, screen_width // 2)
+        screen.blit(text, textRect)
+        pygame.display.flip()
+        time.sleep(3)
 
 
 

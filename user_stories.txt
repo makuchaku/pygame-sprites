@@ -1,0 +1,6 @@
+Load some tank sprites {DONE}
+Load some rocket sprites {DONE}
+When a tank collides with the tank it bounces off {DONE}
+When a tank collides with rocket, both of them get destroyed with a boom sound and should be removed from the viewport
+When tank collides with a tank or a rocket collides with the rocket. Their energy increases by one. Then when a rocket collides with the tank, that energy is released.
+On the top right of the screen always show the total amount of energy released as the game is being played

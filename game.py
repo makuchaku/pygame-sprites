@@ -4,7 +4,7 @@ import pygame
 import time
 import random
 
-width_or_height = 100
+width_or_height = 500
 screen_width = width_or_height
 screen_height = width_or_height
 
@@ -13,8 +13,8 @@ window.fill('light blue')
 
 tanks = []
 rockets = []
-speed = 10000
-num_sprites = 3
+speed = 1000
+num_sprites = 2
 
 
 class Game:
@@ -82,6 +82,10 @@ class Game:
 
     def stop(self):
         pygame.quit()
+
+    
+
+
 
 
 

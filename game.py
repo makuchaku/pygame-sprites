@@ -4,7 +4,7 @@ import pygame
 import time
 import random
 
-width_or_height = 1000
+width_or_height = 100
 screen_width = width_or_height
 screen_height = width_or_height
 

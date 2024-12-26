@@ -13,7 +13,7 @@ window.fill('light blue')
 
 tanks = []
 rockets = []
-speed = 100000
+speed = 10000
 num_sprites = 3
 
 

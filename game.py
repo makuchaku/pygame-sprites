@@ -1,12 +1,14 @@
 # https://www.youtube.com/watch?v=RHMrds9l6nY
 
-import pygame
+import pygame, sys
+from pygame.locals import *
 import time
 import random
 
 width_or_height = 500
 screen_width = width_or_height
 screen_height = width_or_height
+pygame.font.init()
 
 window = pygame.display.set_mode((screen_width, screen_height))
 window.fill('light blue')
@@ -71,10 +73,13 @@ class Game:
                                 sprite.energy += 1
                                 other_sprite.energy += 1
                                 print('Sprite Energy', sprite.energy, 'Other Sprite Energy', other_sprite.energy)
-                            else:
-                                self.energy_released += (sprite.energy + other_sprite.energy)
-                                sprite.kill_sprite()
-                                other_sprite.kill_sprite()
+                            elif sprite.type != other_sprite.type:
+                                if sprite.killed == False and other_sprite.killed == False:
+                                    self.energy_released += (sprite.energy + other_sprite.energy)
+                                    sprite.kill_sprite()
+                                    other_sprite.kill_sprite()
+            self.show_message(str(self.energy_released))
+
                         
 
             # Display everything
@@ -84,18 +89,18 @@ class Game:
         pygame.quit()
 
     
-    def show_message(message):
-        print('showing text')
+    def show_message(self, message):
+        # print('showing text')
         #sets the font and color
         font=pygame.font.SysFont('timesnewroman',  60)
         green = 255, 165, 0
         text = font.render(message, True, green)
         textRect = text.get_rect()
         #puts the score at the center of the screen
-        textRect.center = (screen_height // 2, screen_width // 2)
+        textRect.center = (50, 50)
         window.blit(text, textRect)
         pygame.display.flip()
-        time.sleep(3)
+        # time.sleep(3)
 
 
 
@@ -115,7 +120,7 @@ class Sprite(pygame.sprite.Sprite):
         self.width = width
         self.name = name
         self.type = type
-        self.energy = energy
+        self.energy = 1
         self.killed = False
 
 

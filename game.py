@@ -23,7 +23,8 @@ class Game:
 
     def __init__(self):
         self.energy_released = 0
-        pass
+        # self.explosion_sound = pygame.mixer.music.load("explosion.wav")
+        pygame.mixer.init()
 
     # Creates all sprites
     def create_sprites(self):
@@ -78,6 +79,12 @@ class Game:
                                     self.energy_released += (sprite.energy + other_sprite.energy)
                                     sprite.kill_sprite()
                                     other_sprite.kill_sprite()
+
+
+                                    # pygame.mixer.music.load("explosion.wav")
+                                    # pygame.mixer.music.play(loops=1)
+                                    pygame.mixer.Sound("explosion.wav").play()
+
             self.show_message(str(self.energy_released))
 
                         
@@ -101,6 +108,7 @@ class Game:
         window.blit(text, textRect)
         pygame.display.flip()
         # time.sleep(3)
+    
 
 
 

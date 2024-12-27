@@ -16,7 +16,7 @@ window.fill('light blue')
 tanks = []
 rockets = []
 speed = 1000
-num_sprites = 2
+num_sprites = 5
 
 
 class Game:
@@ -71,19 +71,19 @@ class Game:
                     if sprite.name != other_sprite.name:
                         if sprite.check_and_change_direction(other_sprite) == True:
                             if sprite.type == other_sprite.type:
-                                sprite.energy += 1
-                                other_sprite.energy += 1
-                                print('Sprite Energy', sprite.energy, 'Other Sprite Energy', other_sprite.energy)
+                                if sprite.killed == False and other_sprite.killed == False:
+                                    sprite.energy += 1
+                                    other_sprite.energy += 1
+                                    self.play_sound('punch.wav')
+                                    print('Sprite Energy', sprite.energy, 'Other Sprite Energy', other_sprite.energy)
                             elif sprite.type != other_sprite.type:
                                 if sprite.killed == False and other_sprite.killed == False:
                                     self.energy_released += (sprite.energy + other_sprite.energy)
                                     sprite.kill_sprite()
                                     other_sprite.kill_sprite()
-
-
                                     # pygame.mixer.music.load("explosion.wav")
                                     # pygame.mixer.music.play(loops=1)
-                                    pygame.mixer.Sound("explosion.wav").play()
+                                    self.play_sound('explosion.wav')
 
             self.show_message(str(self.energy_released))
 
@@ -94,6 +94,10 @@ class Game:
 
     def stop(self):
         pygame.quit()
+    
+    
+    def play_sound(self, sound):
+         pygame.mixer.Sound(sound).play()
 
     
     def show_message(self, message):
@@ -150,10 +154,13 @@ class Sprite(pygame.sprite.Sprite):
         self.sprite_y += move_y
 
     def move(self):
+        if self.killed == True:
+            return
         # X
         if self.sprite_x == 0:
             self.direction_x = 1
         if self.sprite_x == screen_width - self.width:
+            game.play_sound('punch.wav')
             self.direction_x = -1
             # Sometimes, change the y direction
             if (random.randint(0, 1000) % 2 == 0):
@@ -167,6 +174,7 @@ class Sprite(pygame.sprite.Sprite):
         if self.sprite_y == 0:
             self.direction_y = 1
         if self.sprite_y == screen_height - self.width:
+            game.play_sound('punch.wav')
             self.direction_y = -1
             # Sometimes, change the x direction
             if (random.randint(0, 1000) % 2 == 0):
